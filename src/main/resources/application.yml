@@ -1,0 +1,13 @@
+server:
+  port: 6001
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db-smart-market
+    password: 1234567
+    username: postgres
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate.ddl-auto: update
+    show-sql: true
