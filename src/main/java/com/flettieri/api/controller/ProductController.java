@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flettieri.api.dto.ProductDTO;
 import com.flettieri.api.model.Product;
 import com.flettieri.api.service.ProductService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = "Produtos")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -21,13 +26,14 @@ public class ProductController {
 	private ProductService productService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<Product> save(@RequestBody Product product) {
-		return ResponseEntity.ok().body(productService.save(product));
+	@ApiOperation("Salvar Produto")
+	public ResponseEntity<Product> save(@RequestBody ProductDTO productDTO) {
+		return ResponseEntity.ok().body(productService.save(productDTO));
 	}
 	
 	@GetMapping("/all")
+	@ApiOperation("Listar todos Produtos")
 	public ResponseEntity<List<Product>> getAll() {
 		return ResponseEntity.ok().body(productService.getAll());
 	}
-	
 }

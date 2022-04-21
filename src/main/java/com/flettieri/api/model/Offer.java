@@ -1,7 +1,7 @@
 package com.flettieri.api.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class Offer extends EntityBase {
 	private BigDecimal price;
 	
 	@Column(name = "date")
-	private LocalDateTime date;
+	private LocalDate date;
 
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
