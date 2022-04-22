@@ -19,6 +19,7 @@ import com.flettieri.core.exceptions.OfferDateException;
 import com.flettieri.core.exceptions.OfferPriceException;
 import com.flettieri.core.exceptions.OfferProductException;
 import com.flettieri.core.exceptions.ProductDescriptionException;
+import com.flettieri.core.exceptions.ProductExistsException;
 import com.flettieri.core.exceptions.ProductNameException;
 
 @RestControllerAdvice
@@ -102,6 +103,20 @@ public class RestResponseEntityExceptionHandler  extends ResponseEntityException
     			System.currentTimeMillis(), 
     			status.value(), 
     			"Product não inserido.", 
+    			e.getMessage(), 
+    			request.getRequestURI());
+    	
+    	return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ProductExistsException.class)
+    public ResponseEntity<StandardError> productExistsException(ProductExistsException e, HttpServletRequest request) {
+    	
+    	HttpStatus status = HttpStatus.BAD_REQUEST;
+    	StandardError err = new StandardError(
+    			System.currentTimeMillis(), 
+    			status.value(), 
+    			"Produto ja existente.", 
     			e.getMessage(), 
     			request.getRequestURI());
     	

@@ -1,6 +1,7 @@
 package com.flettieri.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class ProductService {
 	private ProductValidation productValidation;
 	
 	public Product save(ProductDTO productDTO) {
-		productValidation.validate(productDTO);
+		Optional<Product> productValid = productRepository.findByNameAndDescription(productDTO.getName(), productDTO.getDescription());
+		productValidation.validate(productDTO, productValid);
 			
 		Product product = new Product();
 		product.setName(productDTO.getName());

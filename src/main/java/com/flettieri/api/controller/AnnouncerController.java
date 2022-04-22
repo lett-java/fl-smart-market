@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.flettieri.api.model.Announcer;
 import com.flettieri.api.service.AnnouncerService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = "Anunciador")
 @RestController
 @RequestMapping("/announcer")
 public class AnnouncerController {
@@ -18,6 +22,7 @@ public class AnnouncerController {
 	private AnnouncerService announcerService;
 	
 	@PostMapping("/save")
+	@ApiOperation("Salvar Anunciador")
 	public ResponseEntity<Announcer> save(@RequestBody Announcer announcer) {
 		return ResponseEntity.ok().body(announcerService.save(announcer));
 	}
